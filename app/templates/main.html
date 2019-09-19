@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='ico/VistaPerson.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static',filename='ico/VistaPerson.ico') }}" type="image/x-icon">
+    <link href="{{ url_for('static',filename='css/metro-all.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/layout.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery-3.4.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/metro.min.js') }}"></script>
+    <script type="text/javascript">
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+</head>
+<body>
+    <div class="h-vh-100">
+        <div class="bg-student"></div>
+        <div class="login-form bg-white pt-4 p-10 mx-auto border bd-default win-shadow" data-clear-invalid="2000">
+            <h2 class="text-well text-light text-center"><span class="mif-users mif-2x-sm mr-3"></span>Attendance Portal</h2>
+            <hr class="fat mt-4 mb-4 bg-grey">
+            <div class="grid">
+                <div class="row row-x">
+                    <form id="upload-file" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+                        <div class="cell">
+                            <input type="file" name="photo" data-role="file" data-mode="drop" />
+                        </div>
+                        <div class="cell">
+                            <input type="submit" id="upload-file-btn" class="button outline secondary" value="Mark the Attendance" />
+                        </div>
+                    </form>
+                    <div class="cell"> 
+                        <div class="row row-y">
+                            <div class="cell">
+                                <a href="/train" id="gettrain" class="button outline primary custom-cell">Train the recognizer</a>
+                            </div>
+                        </div>
+                        <div class="row row-y">
+                            <div class="cell">
+                                <a href="/download" id="download" class="button outline success custom-cell">Show the Attendance Sheet</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-x">
+                    <div class="cell">
+                        <div data-role="panel" data-height="180" class="flex-self-center mx-auto w-50">
+                            <table class="table compact table-border cell-border">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th id="date"></th>
+                                        <script>
+                                            var d = new Date();
+                                            var month = d.getMonth() + 1;
+                                            document.getElementById("date").innerHTML = d.getDate() + "/" + month +  "/" + d.getFullYear();
+                                        </script>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in name %}
+                                    <tr>
+                                        <td>{{ item[0] }}</td>
+                                        <td>{{ item[1] }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $("document").ready(function (){
+        $("#upload-file-btn,#gettrain").on("click", function (){
+            Metro.activity.open({
+                overlayColor:'#fff',
+                overlayAlpha:1,
+                text:'<div class=\'mt-2\'>Please Wait...</div>',
+                overlayClickClose:true
+            });
+        });
+    });
+</script>
+</html>

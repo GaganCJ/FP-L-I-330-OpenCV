@@ -1,0 +1,52 @@
+.login-form {
+    width: 60%;
+    height: auto;
+    margin-top: -230px;
+    z-index: 99;
+    top: -60%;
+    border-radius:25px;
+}
+.bg-student{
+    /* The image used */
+    background-image: url("../ico/pesurr.jpg");
+    
+    /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    
+    /* Full height */
+    height: 100%; 
+    
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.text-well{
+    margin-bottom: 18px;
+    margin-top: 0px;
+}
+.row-x{
+    align-items: center;
+    text-align: center;
+    margin: 1% 0%;
+}
+.row-y{
+    margin: 0% -10%;
+    margin-top: -4%;
+    margin-bottom: 9%;
+}
+.custom-cell{
+    width: 79%!important;
+}
+form{
+    width: 50%;
+}
+a{
+    height: 56px!important;
+    font-size: 22px!important;
+    line-height: 50px!important;
+}
+.table thead th{
+    text-align: center!important;
+}
